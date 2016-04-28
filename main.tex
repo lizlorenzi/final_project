@@ -1,0 +1,65 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+%\setlength{\itemsep}{0pt}
+%\setlength{\parsep}{0pt}
+%\setlength{\oddsidemargin}{-0.1in}
+%\setlength{\evensidemargin}{-0.1in}
+%\setlength{\textheight}{9in}
+%\setlength{\textwidth}{6in}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphics}
+\usepackage{bm}
+\usepackage{setspace}
+\usepackage{verbatim}
+\usepackage{apacite}
+\bibliographystyle{apacite}
+
+
+\doublespacing
+\title{663 Final Project: NUTS Algorithm}
+\author{Stephanie Brown, Liz Lorenzi, Jody Wortman}
+\date{April 6, 2016}
+
+\begin{document}
+
+\maketitle
+
+
+\section*{Abstract}
+Our project aims to implement and explore the No-U-Turn Sampler (NUTS), an algorithm for adaptively setting path lengths in Hamiltonian Monte Carlo. Hamiltonian Monte Carlo (HMC) is an MCMC algorithm that uses first-order gradient information to enable faster convergence by avoiding the random walk behavior and sensitivity to correlated parameters.  Specifically, NUTS uses a recursive algorithm which eliminates the need to manually tune parameters for step size and number of steps.  We implement this algorithm and compare its posterior accuracy and computational efficiency to other MCMC methods, such as Metropolis-Hastings, Gibbs samplers, and Hamiltonian MCMC. We show examples of how the tuning parameters from HMC can result in poor posterior estimations, and how the NUTS recursive tuning results in similar or better estimation without the need for manual tuning. In addition, we implement the Efficient NUTS algorithm as well as the NUTS with Dual Averaging, to explore the speed ups available for this algorithm.
+
+
+\section{Introduction}
+In a growing field of Bayesian statistics and with the increasing use of Bayesian hierarchical models, valid methods for posterior estimation are critical. Because posterior distributions for some models are impossible to calculate analytically, researchers and analysts rely on Markov Chain Monte Carlo (MCMC) when tractable posteriors are unavailable. Commonly used MCMC methods are symmetric Metropolis algorithms and Gibbs samplers. Both of these methods are simple but can take so long to converge that they are not useful. While Hamiltonian Monte Carlo (HMC) addresses some of these issues via an approach that uses a set auxiliary variables, the approach necessitates user input of tuning parameters. Because performance is dependent on these parameters, HMC is not as widely used as it could be given its benefits. This issue is addressed by an algorithm called the No U-Turn Sampler (NUTS) proposed by Hoffman and Gelman \citeyear{homan2014no}. NUTS adaptively sets these parameters so that they do not require user input. \\
+In this paper, we review the background of MCMC and HMC, motivating the adaptation. We then introduce NUTS and outline its advantages. We implement the algorithm in various stages of complexity and efficiency, compare it to other common MCMC methods, explore its strengths and weaknesses, and discuss its benefits to the Bayesian statistics community.
+\subsection{MCMC}
+
+\subsection{Hamiltonian Monte Carlo}
+
+\subsection{NUTS Algorithm}
+
+\subsection{NUTS Advantages}
+
+
+
+\section{Implementation}
+\subsection{Hamiltonian Monte Carlo}
+\subsection{Naive No-U-Turn Sampler}
+
+
+\section{Optimization}
+\subsection{Efficient No-U-Turn Sampler}
+\subsection{No-U-Turn Sampler with Dual Averaging}
+
+
+\section{Testing: Comparison to other MCMC methods}
+\subsection{Posterior Estimation} 
+\subsection{Efficiency}
+\subsection{Comparison to Stan}
+
+\section{Discussion}
+\subsection{Review of Algorithm}
+
+\newpage
+\bibliography{bibliograph.bib}
+\end{document}
