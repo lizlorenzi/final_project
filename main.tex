@@ -46,11 +46,18 @@ In this paper, we review the background of MCMC and HMC, motivating the adaptati
 \subsection{Hamiltonian Monte Carlo}
 \subsection{Naive No-U-Turn Sampler}
 
-
 \section{Optimization}
+The aim of NUTS addresses key efficiency issues in the Hamiltonian Monte Carlo method. HMC is limited by its need of tuning of the step sizes ($\epsilon$) and number of steps($L$), typically needing multiple runs to find the correct parameter values. In addition, Hoffman and Gelman provide additional improvements in the NUTS algorithm to improve the efficiency. The first is Efficient No-U-Turn Sampler.
 \subsection{Efficient No-U-Turn Sampler}
+The original NUTS algorithm takes $2^j -1$ evaluations of the log likelihood and its gradient, where $j$ is the number of times we call BuildTree (see Appendix for more information on algorithms). In addition, there are $O(2^j)$ operations to determine when to stop doubling. When implemented, the most costly computational aspect of the original NUTS algorithm is the computation of the log joint distribution and its gradient. This results in an algorithm that has similar computational complexity to the original HMC. Another computationally costly aspect of the original NUTS is the storage of the $2^j$ position and momentum vectors, requiring a lot of memory.  Efficient NUTS aims to to solve these issues in the following ways. First, we change the transition kernel to produce larger jumps than the simple uniform sampling. This kernel has a memory-efficient implementation, reducing the number of position and momentum vectors stored to $O(j)$ instead of $O(2^j)$ Second, they aim to find a stopping criterion in the final doubling iteration to avoid wasting computation to build a set that won't be used. This is done by breaking out of the recursion when they encounter a zero for the stop indicator $s$.
+  
 \subsection{No-U-Turn Sampler with Dual Averaging}
+NUTS and Efficient NUTS addresses the issue of choosing the number of Leapfrog steps, $L$. NUTS with Dual Averaging aims to take this a step further to also adaptively tuning $\epsilon$, the step size parameter. The Dual Averaging scheme is initially motivated by work of \cite{robbins} where they propose a vanishing adaptation algorithm for MCMC using stochastic approximation. 
 
+...may be removing this section
+
+\subsection{Implementing with Cython}
+For further improvements, we look to the power of Python and its ability to compile python code to C. Specifically, we use the Cython capabilities to covert our working functions to C files for even further optimality. 
 
 \section{Testing: Comparison to other MCMC methods}
 \subsection{Posterior Estimation} 
