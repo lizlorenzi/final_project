@@ -33,12 +33,12 @@ Our project aims to implement and explore the No-U-Turn Sampler (NUTS), an algor
 In a growing field of Bayesian statistics and with the increasing use of Bayesian hierarchical models, valid methods for posterior estimation are critical. Because posterior distributions for some models are impossible to calculate analytically, researchers and analysts rely on Markov Chain Monte Carlo (MCMC) when tractable posteriors are unavailable. Commonly used MCMC methods are symmetric Metropolis algorithms and Gibbs samplers. Both of these methods are simple but can take so long to converge that they are not useful. While Hamiltonian Monte Carlo (HMC) addresses some of these issues via an approach that uses a set auxiliary variables, the approach necessitates user input of tuning parameters. Because performance is dependent on these parameters, HMC is not as widely used as it could be given its benefits. This issue is addressed by an algorithm called the No U-Turn Sampler (NUTS) proposed by Hoffman and Gelman \citeyear{homan2014no}. NUTS adaptively sets these parameters so that they do not require user input. \\
 In this paper, we review the background of MCMC and HMC, motivating the adaptation. We then introduce NUTS and outline its advantages. We implement the algorithm in various stages of complexity and efficiency, compare it to other common MCMC methods, explore its strengths and weaknesses, and discuss its benefits to the Bayesian statistics community.
 \subsection{MCMC}
-
+MCMC methods simulate from a posterior distribution through drawing correlated samples--if the algorithm is correct and appropriate, these will converge to the target distribution \cite{neal}. These methods differ from each other--one common one is Gibbs sampling \cite{geman}, which updates conditional distributions until they all converge. However, this approach requires deriving the conditional distributions, which may not always be possible. Another approach is random walk Metropolis \cite{metropolis}, which uses likelihood ratios to either move to a new point in the posterior distribution or remain in the same place. Both methods may take a very long time to converge, however, as they both explore the parameter space in a stochastic, not necessarily efficient manner. 
 \subsection{Hamiltonian Monte Carlo}
+Hamiltonian Monte Carlo (HMC, also called Hybrid Monte Carlo) \cite{duane, neal} is a method which uses auxiliary variables in the Monte Carlo proposals. The method has a physical motivation, where each of the auxiliary variables $r_d$ correspond to the momentum of each model variable $\theta_d$. The algorithm uses direction and gradient information to update the values. Hoffman and Gelman outline a version of HMC in their paper where a leapfrog function is used to update $r$ and $\theta$ using the leapfrog integrator. The parameter proposals are then accepted or rejected using a Metropolis algorithm \cite{metropolis}. This method can work very well and converge faster than random walk Metropolis, but its degree of success is highly dependent on choosing both the step size $\epsilon$ and the number of steps $L$. Poor choices have varying consequences from inaccuracy to lack of convergence, but they generally lead to a slow but ergodic chain \cite{homan2014no}.
 
-\subsection{NUTS Algorithm}
-
-\subsection{NUTS Advantages}
+\subsection{NUTS Algorithm and Advantages}
+Due to the issues caused by poor choices of $\epsilon$ and $L$ (though mostly $L$), Hoffman and Gelman's paper develops a method to adaptively select these parameters. The No-U-Turn Sampler eliminates the need for select the number of steps, and NUTS with dual averaging allows $\epsilon$ to also be adaptively set. 
 
 
 
@@ -70,3 +70,4 @@ For further improvements, we look to the power of Python and its ability to comp
 \newpage
 \bibliography{bibliograph.bib}
 \end{document}
+
