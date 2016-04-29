@@ -43,8 +43,12 @@ Due to the issues caused by poor choices of $\epsilon$ and $L$ (though mostly $L
 
 
 \section{Implementation}
+The python implementation of the NUTS algorithm involved first coding HMC then NUTS, and finally an efficient version of NUTS which will be discussed in detail in the Optimization section. Care was taken to use functions whenever possible in order to keep code readable and efficient.  Notation was kept consistent with that found in the original algorithm as written by Hoffman and Gelman.
 \subsection{Hamiltonian Monte Carlo}
+Hamiltonian Monte Carlo is a more basic version of our final algorithe, and therefore was where we started.  HMC also served as a time comparison. 
+
 \subsection{Naive No-U-Turn Sampler}
+The Naive NUTS algorithm improves upon HMC and no longer requires the user to specifity the L parameter.  Specification of epsilon is still needed.
 
 \section{Optimization}
 The aim of NUTS addresses key efficiency issues in the Hamiltonian Monte Carlo method. HMC is limited by its need of tuning of the step sizes ($\epsilon$) and number of steps($L$), typically needing multiple runs to find the correct parameter values. In addition, Hoffman and Gelman provide additional improvements in the NUTS algorithm to improve the efficiency. The first is Efficient No-U-Turn Sampler.
